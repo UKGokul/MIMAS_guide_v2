@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute & People - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link active">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Institute & People</h1>
+                <p class="hero-description">
+                    Context and attribution: institute description, department focus, scientific motivation, and contributors.
+                </p>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Contents</div>
+                        <a href="#institute" class="sidebar-link active">Institute Description</a>
+                        <a href="#department" class="sidebar-link">Department Focus</a>
+                        <a href="#motivation" class="sidebar-link">Scientific Motivation</a>
+                        <a href="#contributors" class="sidebar-link">Contributors</a>
+                    </aside>
+                    
+                    <div class="main-column">
+                        <!-- Institute Description -->
+                        <section id="institute" class="content-section">
+                            <h2 class="section-title">Institute Description</h2>
+                            
+                            <div class="content-box">
+                                <h3>Leibniz Institute of Atmospheric Physics at the University of Rostock (IAP), Kühlungsborn</h3>
+                                <p>
+                                    The Leibniz Institute of Atmospheric Physics (IAP) conducts research on the physics of the
+                                    mesosphere and lower thermosphere (MLT), focusing on processes and variability in the
+                                    middle and upper atmosphere. IAP works in close collaboration with national and international
+                                    partners and connects fundamental MLT research to broader questions related to climate change
+                                    and atmospheric forcing of space weather.
+                                </p>
+                                
+                                <p style="margin-top: var(--spacing-md);">
+                                    In the context of MIMAS, IAP provides the scientific environment where model development,
+                                    interpretation, and comparison to observations (e.g., lidar and in-situ measurements) are tightly linked.
+                                    The institute’s observation-driven research culture and long-term expertise in noctilucent clouds (NLC/PMC),
+                                    temperature and wind soundings, and vertical coupling makes it a natural home for MIMAS-family modeling.
+                                </p>
+                                
+                                <div style="margin-top: var(--spacing-lg);">
+                                    <strong>Location:</strong> Kühlungsborn, Germany<br>
+                                    <strong>Founded:</strong> January 1992<br>
+                                    <strong>Website:</strong> <a href="[URL]" target="_blank" rel="noopener">https://www.iap-kborn.de/en/home/</a>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Department Focus -->
+                        <section id="department" class="content-section">
+                            <h2 class="section-title">Department Focus</h2>
+                            
+                            <div class="content-box">
+                                <h3>Department Optical Soundings and Sounding Rockets</h3>
+                                <p>
+                                    The Department of Optical Soundings and Sounding Rockets focuses on ground-based optical remote sensing
+                                    of the middle and upper atmosphere (stratosphere, mesosphere, lower thermosphere) and the scientific
+                                    interpretation of processes in these regions (and, in part, the troposphere). Lidar systems are a core
+                                    experimental method, complemented by high-resolution in-situ measurements from rocket- and balloon-borne payloads.
+                                </p>
+                                
+                                <h4 style="margin-top: var(--spacing-md);">Relevant Research Areas</h4>
+                                <ul class="content-list">
+                                    <li>Exploration of the middle atmosphere (MLT) using long-term remote sensing and targeted in-situ campaigns</li>
+                                    <li>Temperature and wind soundings across mid-latitudes and polar regions to quantify variability and change</li>
+                                    <li>Noctilucent clouds (NLC/PMC) as tracers of temperatures and fine-scale dynamics in the ~80–90 km region</li>
+                                    <li>Vertical coupling by tides, planetary waves, gravity waves, and turbulence across atmospheric layers</li>
+                                </ul>
+                                
+                                <h4 style="margin-top: var(--spacing-md);">Key Facilities</h4>
+                                <ul class="content-list">
+                                    <li>Lidar systems (including Rayleigh/Raman/Mie and metal lidars) operated at IAP and partner sites</li>
+                                    <li>Rocket- and balloon-borne in-situ payloads for small-scale structure measurements in the MLT</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Scientific Motivation -->
+                        <section id="motivation" class="content-section">
+                            <h2 class="section-title">Scientific Motivation</h2>
+                            
+                            <div class="content-box">
+                                <h3>Why MIMAS?</h3>
+                                <p>
+                                    The mesopause region is difficult to observe continuously and comprehensively, yet it is highly sensitive to
+                                    dynamics, chemistry, and climate forcing. MIMAS exists to bridge observations and theory by simulating the
+                                    coupled evolution of an Eulerian water vapour field and Lagrangian ice particles, enabling process-level
+                                    interpretation of noctilucent clouds and mesospheric ice layers.
+                                </p>
+                                
+                                <h4 style="margin-top: var(--spacing-md);">Research Questions</h4>
+                                <ul class="content-list">
+                                    <li><strong>Question 1:</strong> How do transport and turbulence shape the water vapour field and the conditions for NLC formation?</li>
+                                    <li><strong>Question 2:</strong> How do microphysical growth/sublimation, sedimentation, and nucleation control ice particle size and brightness proxies?</li>
+                                    <li><strong>Question 3:</strong> How do waves and vertical coupling influence variability in the MLT, and how can models reproduce observed structures and trends?</li>
+                                </ul>
+                                
+                                <h4 style="margin-top: var(--spacing-md);">Scientific Context</h4>
+                                <p>
+                                    At IAP, MIMAS is part of a broader framework combining long-term lidar measurements, in-situ campaigns,
+                                    and modelling to understand the MLT region and its response to atmospheric forcing. This includes
+                                    interpreting NLC/PMC as indicators of temperature and dynamics, and using model studies to investigate
+                                    long-term change, solar-cycle influences, and coupling between atmospheric layers.
+                                </p>
+                            </div>
+                        </section>
+                        
+                        <!-- Contributors -->
+                        <section id="contributors" class="content-section">
+                            <h2 class="section-title">Contributors</h2>
+                            
+                            <div class="content-bo

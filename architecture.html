@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Architecture - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link active">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Model Architecture</h1>
+                <p class="hero-description">
+                    Structural understanding of MIMAS: grids, time stepping, data sources, and field distinctions.
+                </p>
+            </div>
+        </section>
+
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Contents</div>
+                        <a href="#grids" class="sidebar-link active">Grids (lat/lon/z)</a>
+                        <a href="#time-stepping" class="sidebar-link">Time Stepping</a>
+                        <a href="#data-sources" class="sidebar-link">Data Sources</a>
+                        <a href="#background-fields" class="sidebar-link">Background Fields</a>
+                        <a href="#tracer-fields" class="sidebar-link">Tracer Fields</a>
+                        <a href="#particle-ensemble" class="sidebar-link">Particle Ensemble</a>
+                        <a href="#diagram" class="sidebar-link">Architecture Diagram</a>
+                    </aside>
+
+                    <div class="main-column">
+                        <section id="grids" class="content-section">
+                            <h2 class="section-title">Grids (lat/lon/z)</h2>
+
+                            <div class="content-box">
+                                <h3>Horizontal Grid</h3>
+                                <p>
+                                    MIMAS uses a regular latitude–longitude grid on a spherical Earth. The longitude grid is uniform.
+                                    The latitude grid is explicitly constructed as a fixed array.
+                                </p>
+                                <table class="data-table">
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Value</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Longitude Resolution</td>
+                                        <td>3°</td>
+                                        <td>120 longitudes: 0°, 3°, …, 357°</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Latitude Resolution</td>
+                                        <td>1°</td>
+                                        <td>53 latitudes: 37.5°N, 38.5°N, …, 89.5°N</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grid Type</td>
+                                        <td>Lat–Lon (regular)</td>
+                                        <td>dx varies with latitude via cos(latitude); dy is constant in meters for 1°</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="content-box">
+                                <h3>Vertical Grid</h3>
+                                <p>
+                                    The vertical grid is defined on geometric altitude with constant spacing.
+                                </p>
+                                <table class="data-table">
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Value</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertical Levels</td>
+                                        <td>163</td>
+                                        <td>Indexed k = 1 … 163</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertical Coordinate</td>
+                                        <td>Geometric altitude (km)</td>
+                                        <td>zgeo(k) = 77.8 + 0.1·(k−1) km</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Top Boundary</td>
+                                        <td>94.0 km</td>
+                                        <td>Bottom at 77.8 km; Δz = 0.1 km (100 m)</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="time-stepping" class="content-section">
+                            <h2 class="section-title">Time Stepping</h2>
+
+                            <div class="content-box">
+                                <h3>Temporal Framework</h3>
+                                <p>
+                                    The transport time step in the Fortran is set to 90 seconds (<code>dttrans</code>).
+                                    Several processes run on effective multiples of this (e.g., diffusion uses <code>dttrans_2 = 2·dttrans</code>).
+                                </p>
+                                <table class="data-table">
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Value</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Transport time step</td>
+                                        <td>90 s</td>
+                                        <td>Base step used in CFL checks and advection</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Derived time step</td>
+                                        <td>180 s</td>
+                                        <td>Used in vertical diffusion as <code>dttrans_2</code> (2·dttrans)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Scheme Type</td>
+                                        <td>Split by process</td>
+                                        <td>Eulerian transport (grid fields) + Lagrangian particle loop</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conservation</td>
+                                        <td>Process-dependent</td>
+                                        <td>H₂O is advected as a mixing ratio using a monotonic advection scheme; particles are tracked individually</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="data-sources" class="content-section">
+                            <h2 class="section-title">Data Sources</h2>
+
+                            <div class="grid-2">
+                                <div class="content-box">
+                                    <h3>External Dynamics Forcing (u, v, w, T, ρ)</h3>
+                                    <p>
+                                        Background meteorology is provided as gridded 3-D fields on the MIMAS grid
+                                        (wind components, temperature, density, and a height/vertical reference field).
+                                        In the code this appears as arrays such as <code>um</code>, <code>vm</code>, <code>wm</code>, <code>tm</code>, <code>dm</code>, <code>zm</code>,
+                                        with time levels blended (e.g., <code>um = a1·um1 + a2·um2</code>) in the flow logic.
+                                    </p>
+                                    <ul class="content-list">
+                                        <li>Grid: nbneu × igitneu × kgitneu (53 × 120 × 163)</li>
+                                        <li>Typical fields: u, v, w, T, density (ρ), and z-related field</li>
+                                        <li>Used to drive: Eulerian H₂O transport + particle background conditions</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content-box">
+                                    <h3>Solar Forcing Input (Lyman-α series)</h3>
+                                    <p>
+                                        Photolysis uses an observed Lyman-α time series (<code>xlyman_obs</code>) as input.
+                                        The photodissociation cross section for H₂O is set as a constant in the photolysis routine.
+                                    </p>
+                                    <ul class="content-list">
+                                        <li>Input: <code>xlyman_obs(366)</code> (daily series)</li>
+                                        <li>Used by: <code>sub_photolyse</code></li>
+                                        <li>Role: removes H₂O via photodissociation in sunlit conditions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="background-fields" class="content-section">
+                            <h2 class="section-title">Background Fields</h2>
+
+                            <div class="content-box">
+                                <p>
+                                    Background fields are externally provided meteorological state variables on the fixed MIMAS grid.
+                                    They are treated as forcing for transport and microphysics (i.e., they provide the environment),
+                                    and are used for both Eulerian and Lagrangian parts of the model.
+                                </p>
+
+                                <table class="data-table">
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Source</th>
+                                        <th>Update Frequency</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Temperature (<code>tm</code>)</td>
+                                        <td>External forcing files (read into tm1/tm2 and blended)</td>
+                                        <td>Time-interpolated between forcing snapshots</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wind (u, v, w) (<code>um, vm, wm</code>)</td>
+                                        <td>External forcing files (read into *_1/*_2 and blended)</td>
+                                        <td>Time-interpolated between forcing snapshots</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Density (<code>dm</code>)</td>
+                                        <td>External forcing files</td>
+                                        <td>Time-interpolated between forcing snapshots</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertical reference (<code>zm</code>)</td>
+                                        <td>External forcing files</td>
+                                        <td>Time-interpolated between forcing snapshots</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="tracer-fields" class="content-section">
+                            <h2 class="section-title">Tracer Fields</h2>
+
+                            <div class="content-box">
+                                <p>
+                                    Tracer fields are prognostic quantities evolved by the model. In the current Fortran structure,
+                                    the key Eulerian tracer is the 3-D H₂O field (<code>hm</code>), which is transported on the grid.
+                                    The advection implementation treats the transported scalar explicitly as a mixing ratio.
+                                </p>
+
+                                <table class="data-table">
+                                    <tr>
+                                        <th>Tracer</th>
+                                        <th>Description</th>
+                                        <th>Units</th>
+                                    </tr>
+                                    <tr>
+                                        <td>H₂O (<code>hm</code>)</td>
+                                        <td>Water vapor field (Eulerian grid tracer)</td>
+                                        <td>Mixing ratio (dimensionless; transported as mixing ratio)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ice on particles</td>
+                                        <td>Not a grid tracer: tracked on Lagrangian particles (radius/mass per particle)</td>
+                                        <td>Particle-property (per particle), not a grid field</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dust nuclei on particles</td>
+                                        <td>Particle ensemble carries dust nuclei that may activate for ice growth</td>
+                                        <td>Particle-property (per particle), not a grid field</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section id="particle-ensemble" class="content-section">
+                            <h2 class="section-title">Particle Ensemble</h2>
+
+                            <div class="content-box">
+                                <p>
+                                    MIMAS uses a Lagrangian particle ensemble to represent dust nuclei and ice particles.
+                                    Particle positions are mapped to the Eulerian grid each step (<code>i=int(xfeld)</code>, <code>j=int(yfeld)</code>, <code>k=int(zfeld)</code>)
+                                    to sample background conditions (<code>tm</code>, <code>dm</code>, and <code>hm</code>).
+                                </p>
+                                <ul class="content-list">
+                                    <li><strong>Number of particles:</strong> ≈ 40 million (as documented in the model flow extraction)</li>
+                                    <li><strong>Particle properties:</strong> position (x,y,z), radius/state variables (e.g., <code>rfeld</code>), and dust/ice bookkeeping</li>
+                                    <li><strong>Initialization:</strong> dust size distribution is initialized in discrete radius classes (see dust init routine structure)</li>
+                                    <li><strong>Scientific note:</strong> using the same Kz for Eulerian H₂O diffusion and particle random-walk transport is justified in Berger et al. (2002) (cite in Publications page)</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="diagram" class="content-section">
+                            <h2 class="section-title">Architecture Diagram</h2>
+
+                            <div class="content-box" style="text-align: center; padding: var(--spacing-xxl);">
+                                <div style="background: var(--code-bg); padding: var(--spacing-xl); border-radius: 8px; display: inline-block; max-width: 900px; text-align: left;">
+                                    <p style="color: var(--text-light); margin-bottom: var(--spacing-md);">
+                                        Architecture sketch (code-faithful)
+                                    </p>
+                                    <div class="code-block" style="margin: 0;">
+                                        <code>
+Eulerian (grid) side:
+  Grid: lat (53) × lon (120) × z (163)
+  Fields: hm (H2O mixing ratio), plus forcing: um,vm,wm,tm,dm,zm
+  Steps: advection (Walcek) + vertical diffusion (Kzz) + photolysis
+
+Lagrangian (particle) side:
+  Particle ensemble (~1.40e6)
+  Each step: map particle -> grid cell -> read (tm, dm, hm) -> microphysics update
+                                        </code>
+                                    </div>
+                                    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: var(--spacing-md);">
+                                        This diagram is intentionally minimal: it separates (1) grid tracers and forcing fields from (2) particle-state evolution.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Your model memory, defense safety net, and future self's best friend.</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="flow.html">Next: Model Flow →</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

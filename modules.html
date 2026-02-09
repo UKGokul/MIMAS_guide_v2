@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Modules - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link active">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Physics Modules</h1>
+                <p class="hero-description">
+                    Cross-cutting understanding of physics modules, independent of execution order.
+                </p>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Modules</div>
+                        <a href="#transport" class="sidebar-link active">Water Vapor Transport</a>
+                        <a href="#eddy-diffusion" class="sidebar-link">Eddy Diffusion (Kz)</a>
+                        <a href="#photolysis" class="sidebar-link">Photolysis & Solar Forcing</a>
+                        <a href="#microphysics" class="sidebar-link">Ice Microphysics</a>
+                        <a href="#sedimentation" class="sidebar-link">Sedimentation</a>
+                        <a href="#turbulence" class="sidebar-link">Turbulence vs Diffusion</a>
+                        <a href="#dust" class="sidebar-link">Dust Reallocation</a>
+                    </aside>
+                    
+                    <div class="main-column">
+                        <div class="alert alert-info" style="margin-bottom: var(--spacing-xl);">
+                            <strong>Structure:</strong> Each physics module is independent of execution order. 
+                            Each module answers: What is modeled? How is it implemented? Where does it appear in the flow? 
+                            What are the key references?
+                        </div>
+                        
+                        <!-- Water Vapor Transport -->
+                        <section id="transport" class="content-section">
+                            <h2 class="section-title">Water Vapor Transport</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    Water vapour is transported as an Eulerian grid field (mixing ratio), updated by a monotonic
+                                    advection scheme. This module moves the H₂O field on the model grid using the resolved winds.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    Transport is implemented via a Walcek-style monotonic Eulerian advection step in
+                                    <code>sub_transwalcek(dx,dy,dz,um,vm,wm,hm)</code>, which internally uses a 1D advection operator
+                                    <code>sub_advec1d</code> along each dimension.
+                                </p>
+                                <div class="code-block">
+                                    <code>
+! Key code concepts
+sub_transwalcek: Eulerian advection update for hm (H2O field)
+sub_advec1d:     1D monotonic advection operator used within Walcek transport
+hm:              transported tracer field (water vapour mixing ratio)
+                                    </code>
+                                </div>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step14">Step 14: Eulerian H₂O transport (advection)</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Walcek (2000): Basis for the monotonic Eulerian advection scheme used for tracer transport.</li>
+                                    <li>Berger &amp; von Zahn (2002): Model framework context for coupling transport concepts to the particle environment.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Eddy Diffusion -->
+                        <section id="eddy-diffusion" class="content-section">
+                            <h2 class="section-title">Eddy Diffusion (Kz)</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    Vertical turbulent mixing of water vapour is represented as a diffusion process acting on the Eulerian H₂O field.
+                                    The diffusion strength is controlled by an eddy diffusivity profile (Kz), passed as <code>turbkzz</code>.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    Vertical diffusion is implemented in <code>sub_diffu_h2o(hm,dz,turbkzz)</code>. The subroutine forms a diffusion
+                                    operator and advances the H₂O field using a semi-implicit (Crank–Nicolson-type) formulation and solves the resulting
+                                    tri-diagonal linear system using <code>tridiag</code>.
+                                </p>
+                                <table class="data-table">
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Value/Formula</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Kz</td>
+                                        <td><code>turbkzz(k)</code></td>
+                                        <td>Eddy diffusivity profile used to compute diffusion coefficients in the vertical mixing step.</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step15">Step 15: Vertical diffusion of H₂O (turbulence)</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Berger &amp; von Zahn (2002): Framework context for mixing/transport in the particle–environment system.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Photolysis -->
+                        <section id="photolysis" class="content-section">
+                            <h2 class="section-title">Photolysis & Solar Forcing</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    Water vapour is reduced by photodissociation driven by solar forcing. The model computes solar geometry
+                                    and applies a photolysis tendency to the H₂O field using an external time series input
+                                    (<code>xlyman_obs</code>).
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    Solar geometry is handled in <code>sub_zenit(ntg,itag1,ihemi)</code>. Photolysis is applied in
+                                    <code>sub_photolyse(mnudge,delta_t,ihemi,itag1,xlyman_obs)</code>, which uses the provided Lyman-α forcing series
+                                    (<code>xlyman_obs</code>) to compute a photolysis rate at the top boundary and apply the effect to the model field.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step12">Step 12: Compute solar geometry and photolysis of H₂O</a></li>
+                                    <li><a href="flow.html#step16">Step 16: Photolysis again</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Berger &amp; von Zahn (2002): Framework context for environmental forcing within the coupled system.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Ice Microphysics -->
+                        <section id="microphysics" class="content-section">
+                            <h2 class="section-title">Ice Microphysics</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    Ice particles are treated as a Lagrangian ensemble embedded in an Eulerian background atmosphere. The module updates
+                                    particle properties (e.g., radius) based on local thermodynamic conditions and interacts with the background H₂O field
+                                    through condensation/sublimation coupling.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    The central routine is <code>sub_tracertransp</code>, which performs the combined particle microphysics + particle transport step.
+                                    Lookup tables used by the microphysics (including Kelvin-related terms) are precomputed by <code>sub_tabelle</code>.
+                                    The module uses shared state from common blocks/modules (<code>common_eis</code>, <code>common_h2o</code>, <code>common_tab</code>, etc.)
+                                    and couples particle updates to the H₂O background field.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step9">Step 9: Precompute microphysics lookup tables</a></li>
+                                    <li><a href="flow.html#step17">Step 17: Particle microphysics + particle transport step</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Berger &amp; von Zahn (2002): Core model framework, particle–environment coupling, and transport concepts.</li>
+                                    <li>Murphy &amp; Koop (2005): Saturation vapour pressure formulation used for ice growth calculations (implemented via lookup tables).</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Sedimentation -->
+                        <section id="sedimentation" class="content-section">
+                            <h2 class="section-title">Sedimentation</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    Particles experience a net vertical motion that includes gravitational settling (sedimentation) in addition to the resolved
+                                    vertical wind. Sedimentation acts on the Lagrangian particle positions and directly shapes the vertical redistribution of ice.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    Sedimentation is applied as part of the particle update step inside <code>sub_tracertransp</code>, where particle positions are updated
+                                    using the combined effects of background motion and particle-specific tendencies (including settling). The exact settling formulation
+                                    is implemented in the particle step logic (not as a standalone subroutine in this file).
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step17">Step 17: Particle microphysics + particle transport step</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Berger &amp; von Zahn (2002): Transport concepts for particles embedded in their modeled environment.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Turbulence vs Diffusion -->
+                        <section id="turbulence" class="content-section">
+                            <h2 class="section-title">Turbulence vs Diffusion Mismatch</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    The model represents mixing using different numerical treatments for the two “carriers”:
+                                    water vapour is a mass field updated by Eulerian diffusion/advection, while particles are updated as discrete Lagrangian entities.
+                                    This creates an inherent mismatch when applying the same mixing intensity parameter (Kz) to both representations.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    For H₂O, turbulence is applied as vertical diffusion via <code>sub_diffu_h2o(hm,dz,turbkzz)</code>.
+                                    For particles, turbulent mixing is applied within <code>sub_tracertransp</code> as stochastic displacement/transport logic
+                                    acting on particle positions. Both rely on the same eddy diffusivity input (<code>turbkzz</code>) but act on different state
+                                    representations (Eulerian field vs Lagrangian particles).
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step15">Step 15: Vertical diffusion of H₂O (turbulence)</a></li>
+                                    <li><a href="flow.html#step17">Step 17: Particle microphysics + particle transport step</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Berger &amp; von Zahn (2002): Uses a shared mixing/transport context for the coupled particle–environment system.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Dust Reallocation -->
+                        <section id="dust" class="content-section">
+                            <h2 class="section-title">Dust Reallocation Logic</h2>
+                            
+                            <div class="content-box">
+                                <h3>What is modeled</h3>
+                                <p>
+                                    Condensation nuclei (dust / meteoric smoke particles) are represented as a large discrete population. The model includes
+                                    logic to keep the CN population stable over long integrations by redistributing or “reallocating” dust under certain conditions.
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>How it is implemented</h3>
+                                <p>
+                                    The particle population is initialized by <code>sub_init_staub(...)</code>. The “dust reallocation” itself is executed as a dedicated
+                                    model step and is implemented in the particle system logic (not exposed as a separate subroutine name in this file’s subroutine list).
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Where it appears in the flow</h3>
+                                <p>This module appears in the following execution steps:</p>
+                                <ul class="content-list">
+                                    <li><a href="flow.html#step7">Step 7: Initialize the 40 million dust particles (condensation nuclei)</a></li>
+                                    <li><a href="flow.html#step18">Step 18: Dust “reallocation” to keep the CN population stable</a></li>
+                                </ul>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Key references</h3>
+                                <ul class="content-list">
+                                    <li>Berger &amp; von Zahn (2002): Particle environment framework in which CN populations are part of the modeled system.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <!-- Navigation -->
+                        <div style="display: flex; justify-content: space-between; margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-color); border-radius: 8px;">
+                            <a href="flow.html" class="btn btn-outline">← Model Flow</a>
+                            <a href="code-reference.html" class="btn btn-primary">Next: Code Reference →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Your model memory, defense safety net, and future self's best friend.</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="code-reference.html">Next: Code Reference →</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

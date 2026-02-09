@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments & Results - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link active">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Experiments & Results</h1>
+                <p class="hero-description">
+                    Bridge to thesis: experiment matrix, parameter variations, output variables, and key plots.
+                </p>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Contents</div>
+                        <a href="#experiment-matrix" class="sidebar-link active">Experiment Matrix</a>
+                        <a href="#parameter-variations" class="sidebar-link">Parameter Variations</a>
+                        <a href="#output-variables" class="sidebar-link">Output Variables</a>
+                        <a href="#key-plots" class="sidebar-link">Key Plots</a>
+                        <a href="#interpretation" class="sidebar-link">Interpretation Links</a>
+                    </aside>
+                    
+                    <div class="main-column">
+                        <div class="alert alert-info" style="margin-bottom: var(--spacing-xl);">
+                            <strong>Purpose:</strong> This section bridges the documentation to your thesis. 
+                            Document experiments, variations, and key results here.
+                        </div>
+                        
+                        <!-- Experiment Matrix -->
+                        <section id="experiment-matrix" class="content-section">
+                            <h2 class="section-title">Experiment Matrix</h2>
+                            
+                            <div class="content-box">
+                                <p>
+                                    Overview of all experiments conducted with MIMAS and their relationships.
+                                </p>
+                                
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Experiment ID</th>
+                                            <th>Description</th>
+                                            <th>Parameters Varied</th>
+                                            <th>Purpose</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>EXP001</td>
+                                            <td>[Description]</td>
+                                            <td>[Parameters]</td>
+                                            <td>[Purpose]</td>
+                                            <td><span class="tag primary">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>EXP002</td>
+                                            <td>[Description]</td>
+                                            <td>[Parameters]</td>
+                                            <td>[Purpose]</td>
+                                            <td><span class="tag">In Progress</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>EXP003</td>
+                                            <td>[Description]</td>
+                                            <td>[Parameters]</td>
+                                            <td>[Purpose]</td>
+                                            <td><span class="tag primary">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>EXP004</td>
+                                            <td>[Description]</td>
+                                            <td>[Parameters]</td>
+                                            <td>[Purpose]</td>
+                                            <td><span class="tag">Planned</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        
+                        <!-- Parameter Variations -->
+                        <section id="parameter-variations" class="content-section">
+                            <h2 class="section-title">Parameter Variations</h2>
+                            
+                            <div class="content-box">
+                                <p>
+                                    Systematic parameter variations and their effects on model behavior.
+                                </p>
+                                
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Baseline Value</th>
+                                            <th>Variations</th>
+                                            <th>Expected Effect</th>
+                                            <th>Relevant Experiment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>[PARAM_1]</td>
+                                            <td>[VALUE]</td>
+                                            <td>[VALUES]</td>
+                                            <td>[EFFECT]</td>
+                                            <td><a href="#experiment-matrix">EXP001</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>[PARAM_2]</td>
+                                            <td>[VALUE]</td>
+                                            <td>[VALUES]</td>
+                                            <td>[EFFECT]</td>
+                                            <td><a href="#experiment-matrix">EXP002</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>[PARAM_3]</td>
+                                            <td>[VALUE]</td>
+                                            <td>[VALUES]</td>
+                                            <td>[EFFECT]</td>
+                                            <td><a href="#experiment-matrix">EXP003</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        
+                        <!-- Output Variables -->
+                        <section id="output-variables" class="content-section">
+                            <h2 class="section-title">Output Variables</h2>
+                            
+                            <div class="content-box">
+                                <p>
+                                    List of model output variables and their definitions.
+                                </p>
+                                
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Variable</th>
+                                            <th>Description</th>
+                                            <th>Units</th>
+                                            <th>Dimensions</th>
+                                            <th>Availability</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>[VAR_H2O]</td>
+                                            <td>Water vapor mixing ratio</td>
+                                            <td>[UNITS]</td>
+                                            <td>[DIMS]</td>
+                                            <td>All experiments</td>
+                                        </tr>
+                                        <tr>
+                                            <td>[VAR_TEMP]</td>
+                                            <td>Temperature</td>
+                                            <td>[UNITS]</td>
+                                            <td>[DIMS]</td>
+                                            <td>All experiments</td>
+                                        </tr>
+                                        <tr>
+                                            <td>[VAR_ICE]</td>
+                                            <td>Ice content</td>
+                                            <td>[UNITS]</td>
+                                            <td>[DIMS]</td>
+                                            <td>EXP001, EXP003</td>
+                                        </tr>
+                                        <tr>
+                                            <td>[VAR_FLUX]</td>
+                                            <td>Flux variable</td>
+                                            <td>[UNITS]</td>
+                                            <td>[DIMS]</td>
+                                            <td>EXP002</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        
+                        <!-- Key Plots -->
+                        <section id="key-plots" class="content-section">
+                            <h2 class="section-title">Key Plots</h2>
+                            
+                            <div class="grid-2">
+                                <div class="content-box" style="text-align: center;">
+                                    <h3>Plot Title 1</h3>
+                                    <div style="background: var(--code-bg); padding: var(--spacing-xl); border-radius: 8px; margin: var(--spacing-md) 0; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                                        <p style="color: var(--text-light);">
+                                            [Plot Image Placeholder]
+                                        </p>
+                                    </div>
+                                    <p><strong>Description:</strong> [Description of plot and what it shows]</p>
+                                    <p><strong>Experiment:</strong> <a href="#experiment-matrix">EXP001</a></p>
+                                    <p><strong>Interpretation:</strong> <a href="#interpretation">See Section →</a></p>
+                                </div>
+                                
+                                <div class="content-box" style="text-align: center;">
+                                    <h3>Plot Title 2</h3>
+                                    <div style="background: var(--code-bg); padding: var(--spacing-xl); border-radius: 8px; margin: var(--spacing-md) 0; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                                        <p style="color: var(--text-light);">
+                                            [Plot Image Placeholder]
+                                        </p>
+                                    </div>
+                                    <p><strong>Description:</strong> [Description of plot and what it shows]</p>
+                                    <p><strong>Experiment:</strong> <a href="#experiment-matrix">EXP002</a></p>
+                                    <p><strong>Interpretation:</strong> <a href="#interpretation">See Section →</a></p>
+                                </div>
+                                
+                                <div class="content-box" style="text-align: center;">
+                                    <h3>Plot Title 3</h3>
+                                    <div style="background: var(--code-bg); padding: var(--spacing-xl); border-radius: 8px; margin: var(--spacing-md) 0; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                                        <p style="color: var(--text-light);">
+                                            [Plot Image Placeholder]
+                                        </p>
+                                    </div>
+                                    <p><strong>Description:</strong> [Description of plot and what it shows]</p>
+                                    <p><strong>Experiment:</strong> <a href="#experiment-matrix">EXP003</a></p>
+                                    <p><strong>Interpretation:</strong> <a href="#interpretation">See Section →</a></p>
+                                </div>
+                                
+                                <div class="content-box" style="text-align: center;">
+                                    <h3>Plot Title 4</h3>
+                                    <div style="background: var(--code-bg); padding: var(--spacing-xl); border-radius: 8px; margin: var(--spacing-md) 0; min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                                        <p style="color: var(--text-light);">
+                                            [Plot Image Placeholder]
+                                        </p>
+                                    </div>
+                                    <p><strong>Description:</strong> [Description of plot and what it shows]</p>
+                                    <p><strong>Experiment:</strong> <a href="#experiment-matrix">EXP004</a></p>
+                                    <p><strong>Interpretation:</strong> <a href="#interpretation">See Section →</a></p>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Interpretation Links -->
+                        <section id="interpretation" class="content-section">
+                            <h2 class="section-title">Interpretation Links</h2>
+                            
+                            <div class="content-box">
+                                <p>
+                                    Connect experimental results to scientific interpretation and thesis chapters.
+                                </p>
+                                
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <span><strong>EXP001 Interpretation</strong> - [Title]</span>
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <p>
+                                            [Scientific interpretation of EXP001 results and their significance]
+                                        </p>
+                                        <p style="margin-top: var(--spacing-md);">
+                                            <strong>Thesis Chapter:</strong> <a href="#">[Chapter X: Title]</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <span><strong>EXP002 Interpretation</strong> - [Title]</span>
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <p>
+                                            [Scientific interpretation of EXP002 results and their significance]
+                                        </p>
+                                        <p style="margin-top: var(--spacing-md);">
+                                            <strong>Thesis Chapter:</strong> <a href="#">[Chapter Y: Title]</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <span><strong>EXP003 Interpretation</strong> - [Title]</span>
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <p>
+                                            [Scientific interpretation of EXP003 results and their significance]
+                                        </p>
+                                        <p style="margin-top: var(--spacing-md);">
+                                            <strong>Thesis Chapter:</strong> <a href="#">[Chapter Z: Title]</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Navigation -->
+                        <div style="display: flex; justify-content: space-between; margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-color); border-radius: 8px;">
+                            <a href="code-reference.html" class="btn btn-outline">← Code Reference</a>
+                            <a href="institute.html" class="btn btn-primary">Next: Institute & People →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Your model memory, defense safety net, and future self's best friend.</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="institute.html">Next: Institute & People →</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

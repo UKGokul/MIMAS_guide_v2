@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Flow - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link active">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Model Flow</h1>
+                <p class="hero-description">
+                    The heart of the documentation: 21-step execution logic with clear separation between code facts and scientific interpretation.
+                </p>
+                
+                <div style="display: flex; gap: var(--spacing-md); justify-content: center; margin-top: var(--spacing-xl); flex-wrap: wrap;">
+                    <span class="layer-badge layer-what">What Happens</span>
+                    <span class="layer-badge layer-code">Code Layer</span>
+                    <span class="layer-badge layer-science">Science Layer</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Execution Steps</div>
+                        <a href="#step1" class="sidebar-link active">Step 1</a>
+                        <a href="#step2" class="sidebar-link">Step 2</a>
+                        <a href="#step3" class="sidebar-link">Step 3</a>
+                        <a href="#step4" class="sidebar-link">Step 4</a>
+                        <a href="#step5" class="sidebar-link">Step 5</a>
+                        <a href="#step6" class="sidebar-link">Step 6</a>
+                        <a href="#step7" class="sidebar-link">Step 7</a>
+                        <a href="#step8" class="sidebar-link">Step 8</a>
+                        <a href="#step9" class="sidebar-link">Step 9</a>
+                        <a href="#step10" class="sidebar-link">Step 10</a>
+                        <a href="#step11" class="sidebar-link">Step 11</a>
+                        <a href="#step12" class="sidebar-link">Step 12</a>
+                        <a href="#step13" class="sidebar-link">Step 13</a>
+                        <a href="#step14" class="sidebar-link">Step 14</a>
+                        <a href="#step15" class="sidebar-link">Step 15</a>
+                        <a href="#step16" class="sidebar-link">Step 16</a>
+                        <a href="#step17" class="sidebar-link">Step 17</a>
+                        <a href="#step18" class="sidebar-link">Step 18</a>
+                        <a href="#step19" class="sidebar-link">Step 19</a>
+                        <a href="#step20" class="sidebar-link">Step 20</a>
+                        <a href="#step21" class="sidebar-link">Step 21</a>
+                    </aside>
+                    
+                    <div class="main-column">
+                        <div class="alert alert-info" style="margin-bottom: var(--spacing-xl);">
+                            <strong>Strong Constraint:</strong> No scientific interpretation may contradict the code. 
+                            The three layers must remain strictly separated.
+                        </div>
+                        
+                        <!-- Step 1 -->
+                        <section id="step1" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">1</span>
+                                Main program starts + defines the simulation window
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>The program (PROGRAM walcek) first defines:<br>
+                                    year to simulate (i_jahr)<br>
+                                    a fixed “dynamics year” for winds (i_jahr_fixdyn = 1976)<br>
+                                    season limits (start/end month/day)<br>
+                                    grid sizes (lat, lon, vertical) and the base time step (dttrans = 90 s)<br>
+                                    This is basically: “what time period am I running, and what resolution am I using?”</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>dttrans</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> See overview for details on this model's physics processes.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Main program starts + defines the simulation window. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: dttrans.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 2 -->
+                        <section id="step2" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">2</span>
+                                Read / initialize background fields and arrays
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Initializes arrays and reads or sets up the background fields needed for the run (grids, state variables, and the working arrays used throughout the time loop).</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>um1, vm1, wm1, tm1, hm</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Establishes initial conditions and state arrays for the coupled particle–environment simulation.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Read / initialize background fields and arrays. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: um1, vm1, wm1, tm1, hm.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 3 -->
+                        <section id="step3" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">3</span>
+                                Define output cadence + bookkeeping counters
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Defines how often diagnostics, restart, and output fields are written and sets counters for the time integration loop.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>ntg, itag1</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Controls the temporal sampling of model diagnostics and outputs.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Define output cadence + bookkeeping counters. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: ntg, itag1.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 4 -->
+                        <section id="step4" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">4</span>
+                                Read / compute initial temperature field
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Initializes the temperature field used by microphysics and transport steps.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>tm1</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Temperature controls saturation, condensation/sublimation, and growth rates.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Read / compute initial temperature field. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: tm1.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 5 -->
+                        <section id="step5" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">5</span>
+                                Read / compute initial wind fields
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Initializes the 3D wind fields used for Eulerian transport and to advect particle positions.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>um1, vm1, wm1</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Winds provide resolved advection for tracers and particles.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Read / compute initial wind fields. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: um1, vm1, wm1.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 6 -->
+                        <section id="step6" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">6</span>
+                                Numerical safety check (CFL / Courant condition)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Computes max velocities and checks stability constraints (Courant / CFL) relative to grid spacing and dt. If violated, the run would be numerically unsafe.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>check, sub_maxmin</code></p>
+                                    <p><strong>Variables:</strong> <code>um1, vm1, wm1</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>check, sub_maxmin</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Ensures numerical stability of transport and time integration.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Numerical safety check (CFL / Courant condition). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: um1, vm1, wm1.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 7 -->
+                        <section id="step7" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">7</span>
+                                Initialize the 40 million dust particles (condensation nuclei)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Creates and initializes the particle population that acts as condensation nuclei (dust / meteoric smoke) for subsequent ice particle evolution. Includes size distributions and placement logic.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_init_staub</code></p>
+                                    <p><strong>Variables:</strong> <code>xfeld, yfeld, zfeld, rfeld, rinit</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_init_staub</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Defines the initial CN population on which ice microphysics operates.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Initialize the 40 million dust particles (condensation nuclei). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: xfeld, yfeld, zfeld, rfeld, rinit.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 8 -->
+                        <section id="step8" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">8</span>
+                                Restart / output bootstrapping
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Handles restart logic and initial output bookkeeping. Ensures H₂O and particle state are correctly initialized for continued runs or output continuity.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>hm, rinit</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Maintains continuity of model state across restarts and output sequences.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Restart / output bootstrapping. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm, rinit.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 9 -->
+                        <section id="step9" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">9</span>
+                                Precompute microphysics lookup tables
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Precomputes thermodynamic / microphysical lookup tables used later for fast evaluation of growth-related terms (e.g., saturation and Kelvin-related factors).</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_tabelle</code></p>
+                                    <p><strong>Variables:</strong> <code>common_tab</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_tabelle</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Supports efficient microphysics by tabulating expensive calculations.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Precompute microphysics lookup tables. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: common_tab.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 10 -->
+                        <section id="step10" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">10</span>
+                                Initialize / set up H₂O background (grid field)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Prepares the H₂O field on the Eulerian grid for the run (including ensuring initialization and any required boundary/initial state setup).</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>hm</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Defines the background water vapour distribution used for microphysics and transport.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Initialize / set up H₂O background (grid field). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 11 -->
+                        <section id="step11" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">11</span>
+                                Map initial H₂O onto the 3D grid (only when needed)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>When required, maps an initial H₂O profile from one vertical coordinate to another (pressure-like to geometric height grid), producing a full 3D initial field.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_h2oinit_zpr_to_zgeo</code></p>
+                                    <p><strong>Variables:</strong> <code>hm, hminit3d</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_h2oinit_zpr_to_zgeo</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Ensures the model’s H₂O initial condition is defined on the computational grid.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Map initial H₂O onto the 3D grid (only when needed). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm, hminit3d.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 12 -->
+                        <section id="step12" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">12</span>
+                                Compute solar geometry and photolysis of H₂O
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Computes solar geometry (zenith conditions) and applies photolysis to H₂O using the provided solar forcing time series.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_zenit, sub_photolyse</code></p>
+                                    <p><strong>Variables:</strong> <code>itag1, xlyman_obs, hm</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_zenit, sub_photolyse</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Solar forcing drives photodissociation tendencies applied to water vapour.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Compute solar geometry and photolysis of H₂O. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: itag1, xlyman_obs, hm.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 13 -->
+                        <section id="step13" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">13</span>
+                                Prepare / refresh transport fields for this time step
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Updates or prepares the working arrays used for the transport updates (advection/diffusion), ensuring correct boundary handling and consistent state before transport.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>hm, um1, vm1, wm1</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Bookkeeping layer that ensures consistent inputs to transport updates.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Prepare / refresh transport fields for this time step. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm, um1, vm1, wm1.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 14 -->
+                        <section id="step14" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">14</span>
+                                Eulerian H₂O transport (advection)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Advects the Eulerian water vapour field on the grid using a monotonic transport scheme.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_transwalcek</code></p>
+                                    <p><strong>Variables:</strong> <code>hm, dttrans</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_transwalcek</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Updates H₂O distribution due to resolved advection on the Eulerian grid.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Eulerian H₂O transport (advection). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm, dttrans.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 15 -->
+                        <section id="step15" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">15</span>
+                                Vertical diffusion of H₂O (turbulence)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Applies vertical turbulent mixing to the Eulerian H₂O field as diffusion using an eddy diffusivity profile.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_diffu_h2o</code></p>
+                                    <p><strong>Variables:</strong> <code>hm, dttrans, turbkzz</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_diffu_h2o</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Represents unresolved mixing of water vapour as vertical diffusion.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Vertical diffusion of H₂O (turbulence). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm, dttrans, turbkzz.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 16 -->
+                        <section id="step16" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">16</span>
+                                Photolysis again
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Applies photolysis tendencies again later in the loop to keep H₂O consistent with solar forcing and model timing.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>sub_photolyse</code></p>
+                                    <p><strong>Variables:</strong> <code>xlyman_obs, hm</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>sub_photolyse</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Enforces solar-driven photochemical loss in the model’s timing sequence.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Photolysis again. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: xlyman_obs, hm.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 17 -->
+                        <section id="step17" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">17</span>
+                                Particle microphysics + particle transport step
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Updates the Lagrangian particle ensemble: microphysics (growth/sublimation coupling with background) and transport (advection/turbulent displacement) are performed together for each particle.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>check, sub_tracertransp</code></p>
+                                    <p><strong>Variables:</strong> <code>hm, xfeld, yfeld, zfeld, rfeld</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>check, sub_tracertransp</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Couples the particle population to the modeled environment and updates particle properties and positions consistently each step.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Particle microphysics + particle transport step. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: hm, xfeld, yfeld, zfeld, rfeld.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 18 -->
+                        <section id="step18" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">18</span>
+                                Dust “reallocation” to keep the CN population stable
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Applies a maintenance step to the CN (dust) population so it remains stable over long integrations (a bookkeeping / population-control step).</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Prevents drift/degeneration of the CN population representation in long runs.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Dust “reallocation” to keep the CN population stable. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the intended state update for this stage of the time loop would be skipped.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 19 -->
+                        <section id="step19" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">19</span>
+                                Write outputs / diagnostics (conditional on cadence)
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Writes model outputs (fields and/or particle diagnostics) depending on the current time and configured output cadence.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>ntg, itag1</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Produces diagnostics required for analysis and restart continuity.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Write outputs / diagnostics (conditional on cadence). It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: ntg, itag1.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 20 -->
+                        <section id="step20" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">20</span>
+                                Rotate time levels / refresh prognostic arrays
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Updates the “time level” arrays (e.g., um1→um2, etc.) and prepares fields for the next step; enforces the correct sequencing of old/new arrays.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>um1, um2, vm1, vm2, wm1, wm2, tm1, tm2</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Ensures time stepping uses consistent “current” and “next” state fields.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Rotate time levels / refresh prognostic arrays. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: um1, um2, vm1, vm2, wm1, wm2, tm1, tm2.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 21 -->
+                        <section id="step21" class="flow-step">
+                            <h3 class="flow-step-title">
+                                <span class="flow-step-number">21</span>
+                                Advance time
+                            </h3>
+                            
+                            <div class="flow-layers">
+                                <div class="flow-layer what">
+                                    <h4><span class="layer-badge layer-what">What Happens</span></h4>
+                                    <p>Advances the model clock and loop counters, then proceeds to the next iteration of the integration loop until the simulation window is complete.</p>
+                                </div>
+                                
+                                <div class="flow-layer code">
+                                    <h4><span class="layer-badge layer-code">Code Layer</span></h4>
+                                    <p><strong>Subroutine:</strong> <code>Not identified yet</code></p>
+                                    <p><strong>Variables:</strong> <code>um1, um2</code></p>
+                                    <p><strong>Called by:</strong> <code>PROGRAM walcek (main) / time loop</code></p>
+                                    <p><strong>Calls:</strong> <code>Not mapped here</code></p>
+                                </div>
+                                
+                                <div class="flow-layer science">
+                                    <h4><span class="layer-badge layer-science">Science Layer</span></h4>
+                                    <p><strong>Physical meaning:</strong> Executes time integration by stepping forward in discrete increments.</p>
+                                    <p><strong>Why this step exists:</strong> This step exists to perform: Advance time. It updates the state variables listed in the code layer.</p>
+                                    <p><strong>What would break if removed:</strong> If removed, the following state would not be updated as intended in the time loop: um1, um2.</p>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Navigation between steps -->
+                        <div style="display: flex; justify-content: space-between; margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-color); border-radius: 8px;">
+                            <a href="#" class="btn btn-outline">← Previous Step</a>
+                            <a href="modules.html" class="btn btn-primary">Next: Physics Modules →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Your model memory, defense safety net, and future self's best friend.</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="modules.html">Next: Physics Modules →</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

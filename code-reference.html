@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Reference - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link active">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Code Reference</h1>
+                <p class="hero-description">
+                    Fortran navigation without fear: structured subroutine list with purpose, dependencies, and key variables.
+                </p>
+                
+                <div class="search-container" style="max-width: 500px; margin: var(--spacing-xl) auto 0;">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search subroutines (case-insensitive)..." id="search-input">
+                </div>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Quick Jump</div>
+
+                        <div class="alert alert-info" style="margin-bottom: var(--spacing-md);">
+                            <strong>Tip:</strong> Use search to filter; use Quick Jump to navigate.
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap: var(--spacing-xs);">
+                            <a href="#group-io" class="sidebar-link">I/O & NetCDF</a>
+                            <a href="#group-transport" class="sidebar-link">Transport & Diffusion</a>
+                            <a href="#group-initialization" class="sidebar-link">Initialization & Forcing</a>
+                            <a href="#group-microphysics" class="sidebar-link">Microphysics & Diagnostics</a>
+                            <a href="#group-math" class="sidebar-link">Math / Utilities</a>
+                        </div>
+
+                        <div class="sidebar-title" style="margin-top: var(--spacing-lg);">Subroutines</div>
+                        <div style="display:flex; flex-direction:column; gap: var(--spacing-xs);">
+                            <!-- I/O & NetCDF -->
+                            <a href="#check" class="sidebar-link">check</a>
+                            <a href="#writegrid" class="sidebar-link">writegrid</a>
+
+                            <!-- Transport & Diffusion -->
+                            <a href="#sub_transwalcek" class="sidebar-link">sub_transwalcek</a>
+                            <a href="#sub_advec1d" class="sidebar-link">sub_advec1d</a>
+                            <a href="#sub_diffu_h2o" class="sidebar-link">sub_diffu_h2o</a>
+
+                            <!-- Initialization & Forcing -->
+                            <a href="#sub_init_global" class="sidebar-link">sub_init_global</a>
+                            <a href="#set_monate" class="sidebar-link">set_monate</a>
+                            <a href="#sub_lesedyn" class="sidebar-link">sub_lesedyn</a>
+                            <a href="#sub_leseh2o_zprinit" class="sidebar-link">sub_leseh2o_zprinit</a>
+                            <a href="#sub_h2oinit_zpr_to_zgeo" class="sidebar-link">sub_h2oinit_zpr_to_zgeo</a>
+                            <a href="#sub_photolyse" class="sidebar-link">sub_photolyse</a>
+                            <a href="#sub_zenit" class="sidebar-link">sub_zenit</a>
+                            <a href="#sub_dmget" class="sidebar-link">sub_dmget</a>
+                            <a href="#sub_dmput" class="sidebar-link">sub_dmput</a>
+
+                            <!-- Microphysics & Diagnostics -->
+                            <a href="#sub_tracertransp" class="sidebar-link">sub_tracertransp</a>
+                            <a href="#sub_init_staub" class="sidebar-link">sub_init_staub</a>
+                            <a href="#sub_tabelle" class="sidebar-link">sub_tabelle</a>
+                            <a href="#schreibe_beta0" class="sidebar-link">schreibe_beta0</a>
+                            <a href="#sub_maxmin" class="sidebar-link">sub_maxmin</a>
+                            <a href="#sub_ausdruck" class="sidebar-link">sub_ausdruck</a>
+
+                            <!-- Math / Utilities -->
+                            <a href="#tridiag" class="sidebar-link">tridiag</a>
+                            <a href="#sub_intpol" class="sidebar-link">sub_intpol</a>
+                            <a href="#sub_raspl1" class="sidebar-link">sub_raspl1</a>
+                            <a href="#sub_yspline" class="sidebar-link">sub_yspline</a>
+                        </div>
+                    </aside>
+                    
+                    <div class="main-column">
+                        <div class="alert alert-info" style="margin-bottom: var(--spacing-xl);">
+                            <strong>Note:</strong> Only snippets are included (never full files). Case-insensitive search is available above.
+                        </div>
+
+                        <!-- =========================
+                             GROUP: I/O & NetCDF
+                             ========================= -->
+                        <section id="group-io" class="content-section">
+                            <h2 class="section-title">I/O &amp; NetCDF</h2>
+
+                            <!-- check -->
+                            <div class="content-box subroutine-entry" id="check" data-name="check">
+                                <h3><code>check</code></h3>
+                                <p><strong>Purpose:</strong> Helper routine to report NetCDF error status codes.</p>
+                                
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div>
+                                        <h4>Calls</h4>
+                                        <ul class="content-list">
+                                            <li>—</li>
+                                        </ul>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">istatus</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE check(istatus)
+      USE netcdf
+      IMPLICIT NONE
+      INTEGER, INTENT (IN) :: istatus
+      IF (istatus /= nf90_noerr) THEN
+      write(*,*) TRIM(ADJUSTL(nf90_strerror(istatus)))
+      END IF
+      END SUBROUTINE check
+!:======================================================================
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- writegrid -->
+                            <div class="content-box subroutine-entry" id="writegrid" data-name="writegrid">
+                                <h3><code>writegrid</code></h3>
+                                <p><strong>Purpose:</strong> Write grid coordinates and time axis to a NetCDF output file.</p>
+                                
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div>
+                                        <h4>Calls</h4>
+                                        <ul class="content-list">
+                                            <li><a href="#check">check</a></li>
+                                        </ul>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">outfile</span>
+                                        <span class="tag">xpos</span>
+                                        <span class="tag">ypos</span>
+                                        <span class="tag">zpos</span>
+                                        <span class="tag">time</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE writegrid(outfile,xpos,ypos,zpos,time)
+      USE netcdf
+      USE common_netcdf
+      IMPLICIT NONE
+      REAL(KIND=4), DIMENSION(nbneu), INTENT(IN) :: xpos
+      REAL(KIND=4), DIMENSION(igitneu), INTENT(IN) :: ypos
+      REAL(KIND=4), DIMENSION(kgitneu), INTENT(IN) :: zpos
+      REAL(KIND=4), DIMENSION(tg), INTENT(IN) :: time
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- =========================
+                             GROUP: Transport & Diffusion
+                             ========================= -->
+                        <section id="group-transport" class="content-section">
+                            <h2 class="section-title">Transport &amp; Diffusion</h2>
+
+                            <!-- sub_transwalcek -->
+                            <div class="content-box subroutine-entry" id="sub_transwalcek" data-name="sub_transwalcek">
+                                <h3><code>sub_transwalcek</code></h3>
+                                <p><strong>Purpose:</strong> Eulerian monotonic advection update for tracer field using the Walcek scheme.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div>
+                                        <h4>Calls</h4>
+                                        <ul class="content-list">
+                                            <li><a href="#sub_advec1d">sub_advec1d</a></li>
+                                        </ul>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">dx</span>
+                                        <span class="tag">dy</span>
+                                        <span class="tag">dz</span>
+                                        <span class="tag">um</span>
+                                        <span class="tag">vm</span>
+                                        <span class="tag">wm</span>
+                                        <span class="tag">hm</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_transwalcek (dx,dy,dz,um,vm,wm,hm)
+c-----------------------------------------------------------------------
+...
+c-----------  ost - west transport
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- sub_advec1d -->
+                            <div class="content-box subroutine-entry" id="sub_advec1d" data-name="sub_advec1d">
+                                <h3><code>sub_advec1d</code></h3>
+                                <p><strong>Purpose:</strong> 1D advection step used by the Walcek transport implementation.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">q0</span>
+                                        <span class="tag">qn</span>
+                                        <span class="tag">u</span>
+                                        <span class="tag">dxx</span>
+                                        <span class="tag">den0</span>
+                                        <span class="tag">den1</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_advec1d(ix,ix1,iperiod,
+     &                            dxx,u,den0,den1,dd0,q0,qn)
+c     This subroutine calculates change in mixing ratio (q0) during time
+c     step dt due to advection along a grid idim in length.
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- sub_diffu_h2o -->
+                            <div class="content-box subroutine-entry" id="sub_diffu_h2o" data-name="sub_diffu_h2o">
+                                <h3><code>sub_diffu_h2o</code></h3>
+                                <p><strong>Purpose:</strong> Apply vertical turbulent diffusion to the H2O field (Crank–Nicolson with tridiagonal solve).</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div>
+                                        <h4>Calls</h4>
+                                        <ul class="content-list">
+                                            <li><a href="#tridiag">tridiag</a></li>
+                                        </ul>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">hm</span>
+                                        <span class="tag">dz</span>
+                                        <span class="tag">turbkzz</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_diffu_h2o (hm,dz,turbkzz)
+...
+      do i=1,igitneu
+       do j=3,nbneu
+        do k=1,kgitneu
+         alpha = turbkzz(k)*dttrans_2/(dz*dz)
+...
+        call tridiag(a,b,c,r,u,kgitneu)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- =========================
+                             GROUP: Initialization & Forcing
+                             ========================= -->
+                        <section id="group-initialization" class="content-section">
+                            <h2 class="section-title">Initialization &amp; Forcing</h2>
+
+                            <div class="content-box subroutine-entry" id="sub_init_global" data-name="sub_init_global">
+                                <h3><code>sub_init_global</code></h3>
+                                <p><strong>Purpose:</strong> Initialize global constants/climatologies and compute grid metrics for the run year.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">i_jahr</span>
+                                        <span class="tag">xlyman_obs</span>
+                                        <span class="tag">scale_ch4</span>
+                                        <span class="tag">unix_time</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_init_global(i_jahr,xlyman_obs,scale_ch4,unix_time)
+...
+      do j=1,nbneu
+       xwert = 37.5 +  float(j-1)
+       dx(j)=2.*pi/float(igitneu)*rearth*cos(xwert*pi/180.)
+      enddo
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="set_monate" data-name="set_monate">
+                                <h3><code>set_monate</code></h3>
+                                <p><strong>Purpose:</strong> Set month lengths (incl. leap year) and compute max day-of-year.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">ntage_monat</span>
+                                        <span class="tag">max_doy</span>
+                                        <span class="tag">i_jahr</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE set_monate (ntage_monat,max_doy,i_jahr)
+...
+      mschalt = mod(i_jahr,4)
+      if (mschalt.eq.0) ntage_monat(2) = 29
+      max_doy=365
+      if(ntage_monat(2).eq.29) max_doy=366
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_lesedyn" data-name="sub_lesedyn">
+                                <h3><code>sub_lesedyn</code></h3>
+                                <p><strong>Purpose:</strong> Read dynamical background fields (u, v, w, T, density, z) for a given date/time.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>sleep (external / not shown)</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">um</span>
+                                        <span class="tag">vm</span>
+                                        <span class="tag">wm</span>
+                                        <span class="tag">tm</span>
+                                        <span class="tag">dm</span>
+                                        <span class="tag">zm</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_lesedyn (ihemi,ijahr_fixdyn,
+     &                        ijahr,imonat,itag,istd,um,tm,dm,vm,wm,zm)
+c-----------------------------------------------------------------------
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_leseh2o_zprinit" data-name="sub_leseh2o_zprinit">
+                                <h3><code>sub_leseh2o_zprinit</code></h3>
+                                <p><strong>Purpose:</strong> Read the initial 1D H2O profile on pressure-height levels.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">H2OINIT</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_leseh2o_zprinit
+...
+      open (98,status='old',form='unformatted',file=H2OINIT)
+...
+      END SUBROUTINE sub_leseh2o_zprinit
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_h2oinit_zpr_to_zgeo" data-name="sub_h2oinit_zpr_to_zgeo">
+                                <h3><code>sub_h2oinit_zpr_to_zgeo</code></h3>
+                                <p><strong>Purpose:</strong> Interpolate the initial H2O profile onto the model’s 3D grid.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div>
+                                        <h4>Calls</h4>
+                                        <ul class="content-list">
+                                            <li><a href="#sub_intpol">sub_intpol</a></li>
+                                        </ul>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">zm</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_h2oinit_zpr_to_zgeo (zm)
+...
+      call sub_intpol(kgitzpr,zpress_init,zpress_init_h2o,
+     &                kgitneu,zpressakt,fneu)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_photolyse" data-name="sub_photolyse">
+                                <h3><code>sub_photolyse</code></h3>
+                                <p><strong>Purpose:</strong> Apply photodissociation (photolysis) to the H2O field using Lyman-α forcing.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">mnudge</span>
+                                        <span class="tag">delta_t</span>
+                                        <span class="tag">ihemi</span>
+                                        <span class="tag">itag1</span>
+                                        <span class="tag">xlyman_obs</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_photolyse
+     &                     (mnudge,delta_t,ihemi,itag1,xlyman_obs)
+...
+      phitop_ly = xlyman_obs(itag) * 1.e11
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_zenit" data-name="sub_zenit">
+                                <h3><code>sub_zenit</code></h3>
+                                <p><strong>Purpose:</strong> Compute solar-geometry (zenith/illumination) quantities used by photolysis.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">ntg</span>
+                                        <span class="tag">itag1</span>
+                                        <span class="tag">ihemi</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_zenit (ntg,itag1,ihemi)
+c  ntg: zeitschritt waehrend des tages
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_dmget" data-name="sub_dmget">
+                                <h3><code>sub_dmget</code></h3>
+                                <p><strong>Purpose:</strong> Stage required background files from archive storage (dmget).</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">ihemi</span>
+                                        <span class="tag">ijahr</span>
+                                        <span class="tag">imonat</span>
+                                        <span class="tag">itag</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_dmget (ihemi,ijahr,imonat,itag)
+...
+      res = SYSTEM('dmget '//charname)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_dmput" data-name="sub_dmput">
+                                <h3><code>sub_dmput</code></h3>
+                                <p><strong>Purpose:</strong> Return staged background files back to archive storage (dmput).</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">ihemi</span>
+                                        <span class="tag">ijahr</span>
+                                        <span class="tag">imonat</span>
+                                        <span class="tag">itag</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_dmput (ihemi,ijahr,imonat,itag)
+...
+      res = SYSTEM('dmput -r '//charname)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- =========================
+                             GROUP: Microphysics & Diagnostics
+                             ========================= -->
+                        <section id="group-microphysics" class="content-section">
+                            <h2 class="section-title">Microphysics &amp; Diagnostics</h2>
+
+                            <div class="content-box subroutine-entry" id="sub_tracertransp" data-name="sub_tracertransp">
+                                <h3><code>sub_tracertransp</code></h3>
+                                <p><strong>Purpose:</strong> Main particle microphysics and Lagrangian transport step for tracers/particles.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">common_eis</span>
+                                        <span class="tag">common_h2o</span>
+                                        <span class="tag">common_uvwtd</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_tracertransp
+...
+      USE common_const
+      USE common_tab
+      USE common_eis
+      USE common_uvwtd
+      USE common_h2o
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_init_staub" data-name="sub_init_staub">
+                                <h3><code>sub_init_staub</code></h3>
+                                <p><strong>Purpose:</strong> Initialize dust particle ensemble (positions and initial radius distribution).</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">nstart</span>
+                                        <span class="tag">j_mesopause</span>
+                                        <span class="tag">j_zpress86km</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_init_staub (nstart,bbreite,bsum,j_mesopause,
+     &                                               j_zpress86km)
+...
+      USE common_const
+      USE common_eis
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_tabelle" data-name="sub_tabelle">
+                                <h3><code>sub_tabelle</code></h3>
+                                <p><strong>Purpose:</strong> Precompute microphysics lookup tables (e.g., saturation/Kelvin terms) for fast runtime access.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">common_tab</span>
+                                        <span class="tag">faktkelvin_tab</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_tabelle
+...
+c  kelvin formel:     faktkelvin_tab  0.1 - 30 nm
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="schreibe_beta0" data-name="schreibe_beta0">
+                                <h3><code>schreibe_beta0</code></h3>
+                                <p><strong>Purpose:</strong> Compute and write diagnostic fields (e.g., beta/extinction, radii, number densities) to output.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>sleep (external / not shown)</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">tu</span>
+                                        <span class="tag">betaorg</span>
+                                        <span class="tag">ext_coef532</span>
+                                        <span class="tag">densice</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE schreibe_beta0(tu)
+...
+      real*4 betaorg(nbneu,igitneu,kgitneu)
+      real*4 ext_coef532(nbneu,igitneu,kgitneu)
+      real*4 densice(nbneu,igitneu,kgitneu)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_maxmin" data-name="sub_maxmin">
+                                <h3><code>sub_maxmin</code></h3>
+                                <p><strong>Purpose:</strong> Compute maximum Courant numbers from wind fields for stability checking.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">um</span>
+                                        <span class="tag">vm</span>
+                                        <span class="tag">wm</span>
+                                        <span class="tag">dttrans</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_maxmin (um,vm,wm)
+...
+      ucour_max = dttrans*umax
+      vcour_max = dttrans*vmax
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_ausdruck" data-name="sub_ausdruck">
+                                <h3><code>sub_ausdruck</code></h3>
+                                <p><strong>Purpose:</strong> Debug printout of selected values from a 3D field.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">feld</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE sub_ausdruck(feld)
+...
+      do k=1,kgitneu,2
+       write(6,1000) k,(feld(j,i,k),j=1,53,5),k
+      enddo
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- =========================
+                             GROUP: Math / Utilities
+                             ========================= -->
+                        <section id="group-math" class="content-section">
+                            <h2 class="section-title">Math / Utilities</h2>
+
+                            <div class="content-box subroutine-entry" id="tridiag" data-name="tridiag">
+                                <h3><code>tridiag</code></h3>
+                                <p><strong>Purpose:</strong> Solve a tridiagonal linear system (Thomas algorithm).</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">a</span>
+                                        <span class="tag">b</span>
+                                        <span class="tag">c</span>
+                                        <span class="tag">r</span>
+                                        <span class="tag">u</span>
+                                        <span class="tag">n</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+SUBROUTINE tridiag (a,b,c,r,u,n)
+...
+      end
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_intpol" data-name="sub_intpol">
+                                <h3><code>sub_intpol</code></h3>
+                                <p><strong>Purpose:</strong> Interpolation driver using spline routines for mapping profiles between grids.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div>
+                                        <h4>Calls</h4>
+                                        <ul class="content-list">
+                                            <li><a href="#sub_yspline">sub_yspline</a></li>
+                                            <li><a href="#sub_raspl1">sub_raspl1</a></li>
+                                        </ul>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">n</span>
+                                        <span class="tag">x</span>
+                                        <span class="tag">y</span>
+                                        <span class="tag">ni</span>
+                                        <span class="tag">xi</span>
+                                        <span class="tag">yi</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+subroutine sub_intpol(n,x,y,ni,xi,yi)
+...
+      call sub_raspl1(n,x,y,p,q,y1,a,b,c,d)
+...
+      call sub_yspline(n,x,xi(i),a,b,c,d,yi(i),p,q)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_raspl1" data-name="sub_raspl1">
+                                <h3><code>sub_raspl1</code></h3>
+                                <p><strong>Purpose:</strong> Compute spline coefficients used by the interpolation routines.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">a</span>
+                                        <span class="tag">b</span>
+                                        <span class="tag">c</span>
+                                        <span class="tag">d</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+subroutine sub_raspl1(n,x,y,p,q,y1,a,b,c,d)
+...
+      real*4    x(n),y(n),p(380),q(380),y1(380),
+     &          a(380),b(380),
+     &          c(380),d(380)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-box subroutine-entry" id="sub_yspline" data-name="sub_yspline">
+                                <h3><code>sub_yspline</code></h3>
+                                <p><strong>Purpose:</strong> Evaluate spline interpolation at a given x location.</p>
+                                <div class="grid-2" style="margin-top: var(--spacing-md);">
+                                    <div><h4>Calls</h4><ul class="content-list"><li>—</li></ul></div>
+                                    <div></div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Key Variables</h4>
+                                    <div style="display: flex; flex-wrap: wrap; gap: var(--spacing-xs);">
+                                        <span class="tag primary">xwert</span>
+                                        <span class="tag">ywert</span>
+                                        <span class="tag">a</span>
+                                        <span class="tag">b</span>
+                                        <span class="tag">c</span>
+                                        <span class="tag">d</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: var(--spacing-md);">
+                                    <h4>Code Snippet</h4>
+                                    <div class="code-block">
+                                        <code>
+subroutine sub_yspline(n,x,xwert,a,b,c,d,ywert,p,q)
+...
+      ywert=a(i)*u+b(i)*t+c(i)*u*u*u/(p(i)*t+1.)+d(i)*t*t*t/(
+     &q(i)*u+1.)
+...
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Navigation -->
+                        <div style="display: flex; justify-content: space-between; margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: var(--bg-color); border-radius: 8px;">
+                            <a href="modules.html" class="btn btn-outline">← Physics Modules</a>
+                            <a href="experiments.html" class="btn btn-primary">Next: Experiments & Results →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Your model memory, defense safety net, and future self's best friend.</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="experiments.html">Next: Experiments & Results →</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

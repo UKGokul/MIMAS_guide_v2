@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIMAS Documentation Website (v2)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="overview.html" class="nav-link">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero">
+            <div class="container">
+                <h1>MIMAS Documentation Website</h1>
+                <p class="hero-description">
+                    Documentation for the <strong>Mesospheric Ice Microphysics And tranSport model (MIMAS)</strong> —
+                    a realistic 3-D process model for mesospheric ice clouds, connecting model physics, code structure,
+                    and key scientific references for internal scientific use at <strong>IAP Kühlungsborn</strong>.
+                </p>
+                <div class="hero-buttons">
+                    <a href="overview.html" class="btn btn-primary">
+                        Start with Overview →
+                    </a>
+                    <a href="flow.html" class="btn btn-secondary">
+                        Jump to Model Flow
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <h2 class="section-title">Explore the Documentation</h2>
+                
+                <div class="grid-3">
+                    <a href="overview.html" class="card">
+                        <div class="card-icon">📖</div>
+                        <h3>Model Overview</h3>
+                        <p>What MIMAS simulates, what questions it can answer, and why a 3-D ice + transport framework is needed for realistic mesospheric ice studies.</p>
+                    </a>
+                    
+                    <a href="architecture.html" class="card">
+                        <div class="card-icon">🏗️</div>
+                        <h3>Model Architecture</h3>
+                        <p>Grids, time stepping, forcing vs prognostic state, and the separation between background fields, tracers, and the particle ensemble.</p>
+                    </a>
+                    
+                    <a href="flow.html" class="card">
+                        <div class="card-icon">🔄</div>
+                        <h3>Model Flow</h3>
+                        <p>Step-by-step execution logic with strict separation between procedural steps, code facts, and scientific interpretation.</p>
+                    </a>
+                    
+                    <a href="modules.html" class="card">
+                        <div class="card-icon">⚛️</div>
+                        <h3>Physics Modules</h3>
+                        <p>Cross-cutting physics: water vapour transport, eddy diffusion (Kz), photolysis forcing, ice microphysics, sedimentation, and dust logic.</p>
+                    </a>
+                    
+                    <a href="code-reference.html" class="card">
+                        <div class="card-icon">💻</div>
+                        <h3>Code Reference</h3>
+                        <p>Alphabetical subroutine reference focused on purpose, key variables, and where each component fits into the model system.</p>
+                    </a>
+                    
+                    <a href="experiments.html" class="card">
+                        <div class="card-icon">📊</div>
+                        <h3>Experiments & Results</h3>
+                        <p>Experiment matrix and outputs: how parameter changes (e.g., Kz, vertical transport settings) translate into differences in modeled ice layers.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">Quick Information</h2>
+                
+                <div class="grid-2">
+                    <div class="content-box">
+                        <h3 class="section-subtitle">Access & Intended Users</h3>
+                        <ul class="content-list">
+                            <li><strong>Access:</strong> Restricted to authenticated scientific staff</li>
+                            <li><strong>Group:</strong> Department of Optical and Rocket Soundings</li>
+                            <li><strong>Institute:</strong> Leibniz Institute of Atmospheric Physics (IAP), Kühlungsborn</li>
+                            <li><strong>Scope:</strong> Internal model and input/forcing files (not publicly accessible)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h3 class="section-subtitle">What Makes MIMAS Valuable</h3>
+                        <ul class="content-list">
+                            <li>Explicit coupling of <strong>transport + microphysics</strong> in a 3-D framework</li>
+                            <li>Hybrid representation: <strong>Eulerian H₂O</strong> with a <strong>Lagrangian particle ensemble</strong></li>
+                            <li>Designed for controlled experiments on <strong>mixing (Kz)</strong>, transport, and ice evolution</li>
+                            <li>Structured to support traceability from <strong>code → physics → literature</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="container">
+                <h2 class="section-title">What You Can Do Here</h2>
+                
+                <div class="alert alert-info">
+                    <strong>Goal:</strong> Use this site to orient quickly in MIMAS, track where physics is implemented,
+                    and reduce “tribal knowledge” loss between students and staff.
+                </div>
+                
+                <div class="grid-3">
+                    <div style="text-align: center; padding: var(--spacing-lg);">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🧭</div>
+                        <h4>Onboard Fast</h4>
+                        <p style="color: var(--text-light);">Start from the Overview and Architecture to understand the model system before reading code.</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: var(--spacing-lg);">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🧩</div>
+                        <h4>Understand Physics Modules</h4>
+                        <p style="color: var(--text-light);">Read transport, mixing (Kz), photolysis, microphysics, and sedimentation as independent modules.</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: var(--spacing-lg);">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🔍</div>
+                        <h4>Navigate the Fortran</h4>
+                        <p style="color: var(--text-light);">Use the Code Reference to locate subroutines and understand their role without opening full files.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Internal documentation for the Mesospheric Ice Microphysics And tranSport model (MIMAS) — IAP Kühlungsborn</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="overview.html">Overview</a>
+                    <a href="architecture.html">Architecture</a>
+                    <a href="flow.html">Model Flow</a>
+                    <a href="code-reference.html">Code Reference</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

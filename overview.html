@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Overview - MIMAS Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">M</div>
+                    <span class="logo-text">MIMAS</span>
+                </a>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-main" id="main-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="overview.html" class="nav-link active">Overview</a>
+                    <a href="architecture.html" class="nav-link">Architecture</a>
+                    <a href="flow.html" class="nav-link">Model Flow</a>
+                    <a href="modules.html" class="nav-link">Physics Modules</a>
+                    <a href="code-reference.html" class="nav-link">Code Reference</a>
+                    <a href="experiments.html" class="nav-link">Experiments</a>
+                    <a href="institute.html" class="nav-link">Institute</a>
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="main-content">
+        <section class="hero" style="background: linear-gradient(135deg, #0d3d4d 0%, #1a5f7a 100%);">
+            <div class="container">
+                <h1>Model Overview</h1>
+                <p class="hero-description">
+                    Conceptual understanding of MIMAS: what it simulates, why it exists, and what makes it unique.
+                </p>
+            </div>
+        </section>
+        
+        <section class="main-content">
+            <div class="container">
+                <div class="sidebar-layout">
+                    <aside class="sidebar-nav">
+                        <div class="sidebar-title">Contents</div>
+                        <a href="#what-is-mimas" class="sidebar-link active">What is MIMAS?</a>
+                        <a href="#purpose" class="sidebar-link">Purpose & Vision</a>
+                        <a href="#unique-features" class="sidebar-link">Unique Features</a>
+                        <a href="#key-assumptions" class="sidebar-link">Key Assumptions</a>
+                        <a href="#limitations" class="sidebar-link">Known Limitations</a>
+                        <a href="#non-requirements" class="sidebar-link">Non-Requirements</a>
+                    </aside>
+                    
+                    <div class="main-column">
+                        <section id="what-is-mimas" class="content-section">
+                            <h2 class="section-title">What is MIMAS?</h2>
+                            
+                            <div class="alert alert-info">
+                                <strong>One-sentence description:</strong> MIMAS is a 3-D mesospheric ice / particle–environment model that simulates water vapour transport and the evolution of ice particles using an Eulerian grid for H₂O and a Lagrangian ensemble for particles.
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Model Purpose</h3>
+                                <p>
+                                    MIMAS is a scientific model designed to represent the coupled system of
+                                    (1) the mesospheric background environment (winds, temperature, density),
+                                    (2) the Eulerian water vapour field, and
+                                    (3) a Lagrangian population of particles that can carry dust and grow/sublimate ice.
+                                    It provides a framework for understanding and testing how transport, mixing (Kz), and microphysics shape mesospheric ice layers and observable cloud properties.
+                                </p>
+                                
+                                <p style="margin-top: var(--spacing-md);">
+                                    Typical scientific uses include:
+                                </p>
+                                <ul class="content-list">
+                                    <li>Sensitivity studies of NLC/PMC ice layers to eddy diffusion (Kz) and transport</li>
+                                    <li>Testing the role of vertical wind and mixing on layer formation and persistence</li>
+                                    <li>Linking water vapour variability to particle growth/sublimation in a coupled framework</li>
+                                    <li>Interpreting observations by comparing simulated layer structure and variability</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <section id="purpose" class="content-section">
+                            <h2 class="section-title">Purpose & Vision</h2>
+                            
+                            <div class="content-box">
+                                <h3>Problem Statement</h3>
+                                <p>
+                                    The summer mesopause hosts extremely thin and structured ice layers whose behavior is controlled by a tight coupling between
+                                    dynamics (winds and transport), sub-grid mixing (Kz), and ice microphysics. Fully coupled circulation models can struggle to isolate
+                                    these mechanisms at the necessary resolution, while box models cannot represent realistic transport.
+                                </p>
+                                
+                                <p style="margin-top: var(--spacing-md);">
+                                    MIMAS is designed to bridge this gap by prescribing the background atmospheric state while explicitly simulating
+                                    the evolution of water vapour and a Lagrangian particle population. This enables controlled experiments that separate
+                                    forcing (environment) from response (H₂O + particles).
+                                </p>
+                            </div>
+                            
+                            <div class="content-box">
+                                <h3>Vision</h3>
+                                <p>MIMAS is built to support process understanding of mesospheric ice by enabling experiments that:</p>
+                                <ul class="content-list">
+                                    <li>Quantify how transport and mixing set the humidity field that feeds particle growth</li>
+                                    <li>Trace particle histories (growth, sedimentation, recycling) through a Lagrangian representation</li>
+                                    <li>Connect model behavior to established literature (e.g., Berger &amp; von Zahn, 2002) and to observations</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <section id="unique-features" class="content-section">
+                            <h2 class="section-title">Unique Features</h2>
+                            
+                            <div class="grid-2">
+                                <div class="content-box">
+                                    <h3>🔷 Eulerian H₂O + Lagrangian Particles</h3>
+                                    <p>
+                                        H₂O is represented as a 3-D Eulerian tracer field transported on the grid, while ice/dust is represented by a large Lagrangian particle ensemble.
+                                        This hybrid architecture is the central design choice of MIMAS and is the reason transport, mixing, and microphysics can be studied together without turning particles into a purely Eulerian ice mass field.
+                                    </p>
+                                    <div class="tag primary">Transport</div>
+                                    <div class="tag">Hybrid Approach</div>
+                                </div>
+                                
+                                <div class="content-box">
+                                    <h3>🔄 Dust Recycling</h3>
+                                    <p>
+                                        Particles carry dust nuclei through the system, enabling explicit handling of nucleation availability rather than assuming an unlimited dust background.
+                                        This matters for interpreting particle origin, persistence, and sensitivity to initial conditions in a Lagrangian framework.
+                                    </p>
+                                    <div class="tag primary">Microphysics</div>
+                                    <div class="tag">Dust</div>
+                                </div>
+                                
+                                <div class="content-box">
+                                    <h3>⚖️ Prescribed Environment vs Evolving State</h3>
+                                    <p>
+                                        MIMAS distinguishes between prescribed environmental forcing (winds, temperature, density) and evolving model state (H₂O tracer + particle properties).
+                                        This makes it possible to isolate the impacts of transport/mixing/microphysics without requiring a fully self-consistent circulation model.
+                                    </p>
+                                    <div class="tag primary">Dynamics</div>
+                                    <div class="tag">State Separation</div>
+                                </div>
+                                
+                                <div class="content-box">
+                                    <h3>📊 Vertical Structure Resolution</h3>
+                                    <p>
+                                        The model is constructed to resolve sharp vertical structures relevant for mesospheric ice layers and humidity gradients,
+                                        using a high-resolution vertical grid and short integration steps appropriate for transport and microphysical response.
+                                    </p>
+                                    <div class="tag primary">Architecture</div>
+                                    <div class="tag">Vertical Resolution</div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <section id="key-assumptions" class="content-section">
+                            <h2 class="section-title">Key Assumptions</h2>
+                            
+                            <div class="content-box">
+                                <ul class="content-list">
+                                    <li><strong>Assumption 1:</strong> Background meteorology (winds, temperature, density) is prescribed as forcing on the MIMAS grid; MIMAS does not solve the full atmospheric dynamics itself.</li>
+                                    <li><strong>Assumption 2:</strong> H₂O is represented as an Eulerian tracer on the fixed grid and transported using an advection + diffusion framework (monotonic advection; Kz-based mixing).</li>
+                                    <li><strong>Assumption 3:</strong> Ice/dust is represented as a Lagrangian particle ensemble (super-particles), with particle properties evolved individually rather than as a gridded ice mass field.</li>
+                                    <li><strong>Assumption 4:</strong> Unresolved mixing is parameterized via eddy diffusivity (Kz). Using the same Kz concept across Eulerian diffusion and particle transport is a model design choice discussed in the core framework literature (e.g., Berger &amp; von Zahn, 2002).</li>
+                                    <li><strong>Assumption 5:</strong> Photolysis removes H₂O via solar forcing using a Lyman-α time series input; this introduces an explicit external solar control on the H₂O budget.</li>
+                                </ul>
+                                
+                                <div class="alert alert-warning" style="margin-top: var(--spacing-lg);">
+                                    <strong>Note:</strong> Assumptions define the valid scope of model interpretation. Each assumption should be traceable to code and/or key references.
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <section id="limitations" class="content-section">
+                            <h2 class="section-title">Known Limitations</h2>
+                            
+                            <div class="content-box">
+                                <ul class="content-list">
+                                    <li><strong>Limitation 1:</strong> Limited vertical domain (upper mesosphere only): the model grid spans ~77.8–94.0 km, so lower-atmosphere sources and full-column coupling are not represented internally.</li>
+                                    <li><strong>Limitation 2:</strong> Prescribed dynamics: because u, v, w, T, and density are forcing, feedback from microphysics onto winds/temperature is not dynamically closed unless implemented via external coupling.</li>
+                                    <li><strong>Limitation 3:</strong> Hybrid mismatch complexity: H₂O transport is Eulerian while particle motion is Lagrangian; introducing the same “turbulence forcing” into both requires care to remain physically consistent.</li>
+                                    <li><strong>Limitation 4:</strong> External forcing dependence: results can be sensitive to the quality, cadence, and representativeness of the prescribed background fields and boundary conditions.</li>
+                                </ul>
+                            </div>
+                        </section>
+                        
+                        <section id="non-requirements" class="content-section">
+                            <h2 class="section-title">Non-Requirements</h2>
+                            
+                            <div class="content-box">
+                                <p>MIMAS is <strong>not</strong> intended to:</p>
+                                <ul class="content-list">
+                                    <li>Replace a global circulation model (GCM) or provide fully coupled atmospheric dynamics</li>
+                                    <li>Provide operational forecasting or real-time prediction</li>
+                                    <li>Represent the full atmospheric column from troposphere to thermosphere</li>
+                                    <li>Serve as a complete chemistry–climate model with comprehensive reaction networks</li>
+                                    <li>Guarantee unique “best-fit” solutions without uncertainty analysis and observational constraints</li>
+                                </ul>
+                                
+                                <div class="alert alert-success" style="margin-top: var(--spacing-lg);">
+                                    <strong>Focus:</strong> MIMAS is a process model: its strength is controlled experiments that isolate how transport, mixing, and microphysics shape mesospheric ice.
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <strong>MIMAS Documentation Website (v2)</strong><br>
+                    <span style="opacity: 0.8;">Your model memory, defense safety net, and future self's best friend.</span>
+                </div>
+                <nav class="footer-links">
+                    <a href="architecture.html">Next: Architecture →</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

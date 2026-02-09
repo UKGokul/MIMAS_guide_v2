@@ -1,0 +1,442 @@
+Product Requirements Document (PRD)
+Project: MIMAS Documentation Website (v2)
+1. Purpose & Vision
+1.1 Problem Statement
+
+The current MIMAS website successfully documents the execution flow of the model, but it is:
+
+tightly coupled to a single navigation pattern
+
+difficult to extend beyond the “21-stage flow”
+
+not optimized for learning, reference, and scientific explanation at multiple depths
+
+visually minimal and developer-centric, rather than scientist-centric
+
+As MIMAS grows into a thesis backbone, model reference, and potentially a public scientific resource, the website must evolve from a flow viewer into a structured scientific documentation platform.
+
+1.2 Vision
+
+Build a clean, modular, extensible scientific documentation website that:
+
+explains what the model does, how it does it, and why
+
+connects Fortran code, physics, and scientific literature
+
+scales with future additions (new physics, experiments, plots)
+
+can serve as:
+
+your personal model notebook
+
+a thesis companion
+
+a handover document for future students
+
+2. Target Users
+Primary Users
+
+You (Model Developer / Thesis Author)
+
+Deep understanding
+
+Needs traceability between code ↔ physics ↔ results
+
+Uses site daily
+
+Future MIMAS Users (PhD / MSc students)
+
+Need onboarding
+
+Need intuition + references
+
+Often unfamiliar with Fortran
+
+Secondary Users
+
+Supervisors & Collaborators
+
+Want high-level understanding
+
+Want to verify assumptions
+
+May skim, not read deeply
+
+External Readers (optional future)
+
+Interested in NLC modeling
+
+Not expected to read code
+
+3. Goals & Success Criteria
+3.1 Core Goals
+
+Make MIMAS understandable without reading Fortran
+
+Preserve exact execution order and implementation fidelity
+
+Separate code facts from scientific interpretation
+
+Support incremental documentation (you don’t have to finish everything now)
+
+3.2 Success Metrics
+
+You can answer: “Where exactly is this physics implemented?” in <10 seconds
+
+A new student can explain the full model flow after 1–2 days
+
+You can link website sections directly in your thesis
+
+Adding a new section does not require rewriting existing pages
+
+4. Scope
+In Scope
+
+Static website (no backend)
+
+Scientific documentation
+
+Code explanation
+
+Literature linkage
+
+Visual structure for learning
+
+Out of Scope (for now)
+
+Running simulations
+
+Uploading NetCDF files
+
+Live plotting dashboards
+
+User accounts
+
+5. Information Architecture (High-Level)
+Top-Level Navigation
+
+The website shall be structured around conceptual clarity, not file structure.
+
+Primary Sections
+
+Home
+
+Model Overview
+
+Model Architecture
+
+Model Flow (Execution)
+
+Physics Modules
+
+Code Reference
+
+Experiments & Results (future)
+
+Institute & People
+
+Publications
+
+6. Page-Level Requirements
+6.1 Home Page
+
+Purpose: Orientation + entry point
+
+Requirements
+
+One-sentence description of MIMAS
+
+Clear distinction between:
+
+What the model is
+
+What the site contains
+
+Entry buttons:
+
+“Start with Overview”
+
+“Jump to Model Flow”
+
+Minimal cognitive load
+
+6.2 Model Overview
+
+Purpose: Conceptual understanding
+
+Content
+
+What MIMAS simulates
+
+Why MIMAS exists
+
+What is unique about it:
+
+Eulerian H₂O + Lagrangian particles
+
+Dust recycling
+
+Fixed vs evolving dynamics
+
+Key assumptions
+
+Known limitations
+
+Non-requirements
+
+No code here
+
+No equations (optional later)
+
+6.3 Model Architecture
+
+Purpose: Structural understanding
+
+Requirements
+
+Explain:
+
+Grids (lat/lon/z)
+
+Time stepping
+
+Data sources (LIMA, climatologies)
+
+Distinguish:
+
+Background fields
+
+Tracer fields
+
+Particle ensemble
+
+Diagram-first, text-second
+
+6.4 Model Flow (Core Feature)
+
+Purpose: Exact execution logic
+
+This is the heart of the website.
+
+Requirements
+
+Preserve the 21-step execution logic
+
+Each step must have three clearly separated layers:
+
+What Happens
+
+Procedural
+
+No interpretation
+
+Code Layer
+
+Subroutines
+
+Variables
+
+Call relationships
+
+Science Layer
+
+Physical meaning
+
+Why this step exists
+
+What would break if removed
+
+Strong Constraint
+
+No scientific interpretation may contradict the code.
+
+6.5 Physics Modules (New)
+
+Purpose: Cross-cutting understanding
+
+Structure
+Each physics module is independent of execution order.
+
+Example modules:
+
+Water vapor transport
+
+Eddy diffusion (Kz)
+
+Photolysis & solar forcing
+
+Ice microphysics
+
+Sedimentation
+
+Turbulence vs diffusion mismatch
+
+Dust reallocation logic
+
+Each module must answer
+
+What is modeled
+
+How it is implemented
+
+Where it appears in the flow
+
+Key references
+
+6.6 Code Reference
+
+Purpose: Fortran navigation without fear
+
+Requirements
+
+Alphabetical subroutine list
+
+For each subroutine:
+
+Purpose
+
+Called by
+
+Calls
+
+Key variables
+
+Snippets only (never full files)
+
+Case-insensitive search
+
+6.7 Experiments & Results (Future)
+
+Purpose: Bridge to thesis
+
+Planned Content
+
+Experiment matrix
+
+Parameter variations
+
+Output variables
+
+Key plots (static images)
+
+Interpretation links
+
+6.8 Institute & People
+
+Purpose: Context and attribution
+
+Requirements
+
+Institute description
+
+Department focus
+
+Scientific motivation
+
+Contributors (roles, not CVs)
+
+6.9 Publications
+
+Purpose: Scientific grounding
+
+Requirements
+
+Group papers by:
+
+Core framework
+
+Microphysics
+
+Transport
+
+Applications
+
+Explicitly state:
+
+What each paper contributes to MIMAS
+
+7. Non-Functional Requirements
+Performance
+
+Load time < 1s on local server
+
+No heavy JS frameworks
+
+Maintainability
+
+Content editable without touching JS
+
+Clear separation:
+
+data
+
+layout
+
+logic
+
+Accessibility
+
+Keyboard navigation
+
+Readable without color
+
+Longevity
+
+Must still make sense 5 years later
+
+No trendy UI dependencies
+
+8. Design Principles
+
+Scientist-first, not developer-first
+
+Clarity beats cleverness
+
+Explicit is better than implicit
+
+Documentation is part of the model
+
+9. Risks & Mitigations
+Risk	Mitigation
+Over-documentation	Incremental expansion
+Mixing interpretation with fact	Strict layer separation
+Thesis drift	Tie sections explicitly to chapters
+Burnout	“Draft” is acceptable everywhere
+10. Roadmap (Suggested)
+Phase 1 – Foundation
+
+New structure
+
+Overview + Architecture
+
+Clean Model Flow
+
+Phase 2 – Physics Modules
+
+Transport
+
+Microphysics
+
+Turbulence
+
+Phase 3 – Thesis Integration
+
+Experiments
+
+Results
+
+Cross-linking
+
+11. Final Note (Important)
+
+This website is not just a website.
+
+It is:
+
+your model memory
+
+your defense safety net
+
+your future self’s best friend
+
+You are doing the right thing by rebuilding it properly.

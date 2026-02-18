@@ -439,15 +439,21 @@ body {
 .code-block {
     background: var(--code-bg);
     border-radius: 8px;
-    padding: var(--spacing-md);
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    overflow-x: auto;
+    max-height: 24rem;
+    overflow: auto;
     border: 1px solid var(--border-color);
 }
 
 .code-block code {
+    display: block;
+    white-space: pre;
+    line-height: 1.45;
+    tab-size: 4;
     color: var(--text-color);
+    padding: var(--spacing-md);
+    min-width: max-content;
 }
 
 /* Footer */
@@ -729,6 +735,10 @@ body {
     .grid-2,
     .grid-3 {
         grid-template-columns: 1fr;
+    }
+
+    .code-block {
+        max-height: 18rem;
     }
 }
 

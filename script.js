@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Layer toggle (if needed)
     initLayerToggle();
+
+    // Load full Fortran subroutines in code reference page
+    initCodeReferenceSnippets();
 });
 
 /**
@@ -330,6 +333,76 @@ function initCodeCopy() {
             }
         });
     });
+}
+
+/**
+ * Load complete subroutines from mimas_A_2014.f into code blocks.
+ * Falls back to embedded snippet text if the source file is unavailable.
+ */
+async function initCodeReferenceSnippets() {
+    const subroutineEntries = document.querySelectorAll('.subroutine-entry[data-name]');
+    if (subroutineEntries.length === 0) return;
+
+    try {
+        const response = await fetch('mimas_A_2014.f');
+        if (!response.ok) return;
+
+        const source = await response.text();
+        const subroutines = extractFortranSubroutines(source);
+
+        subroutineEntries.forEach(entry => {
+            const subroutineName = (entry.getAttribute('data-name') || '').toLowerCase();
+            const codeElement = entry.querySelector('.code-block code');
+            if (!subroutineName || !codeElement) return;
+
+            const fullCode = subroutines[subroutineName];
+            if (fullCode) {
+                codeElement.textContent = fullCode;
+            }
+        });
+    } catch (error) {
+        // Ignore fetch/parse errors and keep existing embedded snippet text.
+    }
+}
+
+/**
+ * Extract Fortran subroutine blocks keyed by subroutine name.
+ */
+function extractFortranSubroutines(sourceText) {
+    const lines = sourceText.split(/\r?\n/);
+    const subroutines = {};
+    const startRegex = /^\s*subroutine\s+([a-z0-9_]+)/i;
+    const endRegex = /^\s*end\s*(?:subroutine\b(?:\s+[a-z0-9_]+)?\s*)?$/i;
+
+    let activeName = null;
+    let activeStart = -1;
+
+    for (let i = 0; i < lines.length; i += 1) {
+        const line = lines[i];
+        const startMatch = line.match(startRegex);
+
+        if (startMatch) {
+            if (activeName !== null && activeStart >= 0) {
+                subroutines[activeName] = lines.slice(activeStart, i).join('\n');
+            }
+
+            activeName = startMatch[1].toLowerCase();
+            activeStart = i;
+            continue;
+        }
+
+        if (activeName !== null && endRegex.test(line)) {
+            subroutines[activeName] = lines.slice(activeStart, i + 1).join('\n');
+            activeName = null;
+            activeStart = -1;
+        }
+    }
+
+    if (activeName !== null && activeStart >= 0) {
+        subroutines[activeName] = lines.slice(activeStart).join('\n');
+    }
+
+    return subroutines;
 }
 
 // Initialize copy buttons
